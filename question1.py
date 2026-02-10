@@ -14,23 +14,18 @@ for i in tokens:
     if i.isalpha() and len(i) > 2:
             clean_tokens.append(i)
 
-bigrams = []
+token_counts = {}
 
-for i in range(len(clean_tokens) - 1):
-    bigrams.append((clean_tokens[i], clean_tokens[i + 1]))
-
-bigram_counts = {}
-for i in bigrams:
-    if i in bigram_counts:
-        bigram_counts[i] +=1
+for i in clean_tokens:
+    if i in token_counts:
+        token_counts[i] = 1
     else:
-        bigram_counts[i] = 1
+        token_counts[i] = 1
 
-top_bigrams = sorted(bigram_counts.items(), key=lambda x: x[1], reverse=True)[:10]
+most_frequent_tokens = sorted(token_counts.items(), key=lambda x: x[1], reverse=True)[:10]
 
-for i, j in top_bigrams:
-    print(f"{i[0]} {i[1]} -> {j} ", end="")
-
+for i, j, in most_frequent_tokens:
+    print(f"{i} -> {j} ", end="")
 
 
 
