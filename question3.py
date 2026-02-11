@@ -1,13 +1,29 @@
 import string
 
-sample_file = open("sample-file.txt", "r")
-sample_file_lines = sample_file.read_lines()
+new_file = open("sample-file.txt", "r")
+file_lines = new_file.readlines()
 
-tokens = sample_file_lines.split()
+my_dict = {}
 
-clean_tokens = []
+for i in range(len(file_lines)):
+    line = file_lines[i]
+    fixed = line.lower()
+    cleaned = ""
+    for char in fixed:
+        if char not in string.whitespace and char not in string.punctuation:
+            cleaned += char
+    normal = cleaned
 
-for i in tokens:
-    i = i.lower()
-    if i.isalpha():
-        clean_tokens.append(i)
+    if normal == "":
+        continue
+
+    if normal in my_dict:
+        my_dict[normal].append((i+1, line.rstrip()))
+    else:
+        my_dict[normal] = [(i+1, line.rstrip())]
+
+duplicate = [group for group in my_dict.values() if len(group) >1]
+
+for i in range(min(2, len(duplicate))):
+    for j, k in duplicate[i]:
+        print(f"\t{j} -> {normal}")
