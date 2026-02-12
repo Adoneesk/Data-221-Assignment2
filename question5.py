@@ -5,7 +5,7 @@ my_df = pd.read_csv("student.csv")
 def assign_band(grade):
     if grade <=9:
         return "Low"
-    elif 10 <= grade <= 14:
+    elif 10 <= grade and grade <= 14:
         return "Medium"
     else:
         return "High"
@@ -20,5 +20,5 @@ summary = my_df.groupby("grade_band").agg(
 
 summary["internet_percentage"] = summary["internet_percentage"] *100
 
-summary.to_csv("student.csv")
+summary.to_csv("student_bands.csv")
 print(summary)

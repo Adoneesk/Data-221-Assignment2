@@ -3,9 +3,13 @@ from bs4 import BeautifulSoup
 
 ##I am having trouble with the wiki servers, I tried researching how to solve this issue and its leading me to tedious and unnecessary work.
 
-url = requests.get("https://en.wikipedia.org/wiki/List_of_Unemployment_rates")
-soup = BeautifulSoup(url.text, "html.parser")
+url = "https://en.wikipedia.org/wiki/Data_science"
+headers = {
+    "User-Agent": "Mozilla/5.0"
+}
+response = requests.get(url, headers=headers)
 
+soup = BeautifulSoup(response.text, "html.parser")
 content = soup.find("div", id = "mw-content-text")
 
 if content is None:
